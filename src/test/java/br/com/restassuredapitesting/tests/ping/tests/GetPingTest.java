@@ -1,5 +1,6 @@
 package br.com.restassuredapitesting.tests.ping.tests;
 
+import br.com.restassuredapitesting.suites.AllTests;
 import br.com.restassuredapitesting.suites.Healthcheck;
 import br.com.restassuredapitesting.tests.base.tests.BaseTest;
 import br.com.restassuredapitesting.tests.ping.requests.GetPingRequest;
@@ -18,7 +19,7 @@ public class GetPingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category(Healthcheck.class)
+    @Category({Healthcheck.class, AllTests.class})
     @DisplayName("Verificar se API está online")
     public void validarApiOnline() throws Exception {
         getPingRequest.ping().then()

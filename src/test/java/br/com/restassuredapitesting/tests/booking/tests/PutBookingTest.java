@@ -1,6 +1,7 @@
 package br.com.restassuredapitesting.tests.booking.tests;
 
 import br.com.restassuredapitesting.suites.Acceptance;
+import br.com.restassuredapitesting.suites.AllTests;
 import br.com.restassuredapitesting.suites.E2e;
 import br.com.restassuredapitesting.tests.auth.requests.PostAuthRequest;
 import br.com.restassuredapitesting.tests.base.tests.BaseTest;
@@ -27,7 +28,7 @@ public class PutBookingTest extends BaseTest {
 
     @Severity(SeverityLevel.NORMAL)
     @Test
-    @Category(Acceptance.class)
+    @Category({Acceptance.class, AllTests.class})
     @DisplayName("Alterar uma reserva somente utilizando o token")
     public void validarAlterarUmaReservaUtilizandoToken() throws Exception {
         int primeiroId = getBookingRequest.allBookings().then().statusCode(200).extract().path("[0].bookingid");
@@ -40,20 +41,20 @@ public class PutBookingTest extends BaseTest {
 
     @Severity(SeverityLevel.NORMAL)
     @Test
-    @Category(Acceptance.class)
+    @Category({Acceptance.class, AllTests.class})
     @DisplayName("Alterar uma reserva somente utilizando Basic do Authorization")
     public void validarAlterarUmaReservaUtilizandoBasic() throws Exception {
         int primeiroId = getBookingRequest.allBookings().then().statusCode(200).extract().path("[0].bookingid");
 
         putBookingRequest.alterarUmaReservaComBasic(primeiroId).then()
                 .statusCode(200)
-                .time(lessThan(2L), TimeUnit.SECONDS)
+                .time(lessThan(3L), TimeUnit.SECONDS)
                 .body("size()", greaterThan(0));
     }
 
     @Severity(SeverityLevel.NORMAL)
     @Test
-    @Category(E2e.class)
+    @Category({E2e.class, AllTests.class})
     @DisplayName("Tentar alterar uma reserva quando o token não for enviado")
     public void validarAlterarUmaReservaSemUtilizarToken() throws Exception {
         int primeiroId = getBookingRequest.allBookings().then().statusCode(200).extract().path("[0].bookingid");
@@ -65,7 +66,7 @@ public class PutBookingTest extends BaseTest {
 
     @Severity(SeverityLevel.NORMAL)
     @Test
-    @Category(E2e.class)
+    @Category({E2e.class, AllTests.class})
     @DisplayName("Tentar alterar uma reserva quando o token enviado for inválido")
     public void validarAlterarUmaReservaComTokenInvalido() throws Exception {
         int primeiroId = getBookingRequest.allBookings().then().statusCode(200).extract().path("[0].bookingid");
@@ -77,7 +78,7 @@ public class PutBookingTest extends BaseTest {
 
     @Severity(SeverityLevel.NORMAL)
     @Test
-    @Category(E2e.class)
+    @Category({E2e.class, AllTests.class})
     @DisplayName("Tentar alterar uma reserva que não existe")
     public void validarAlterarUmaReservaInexistente() throws Exception {
 

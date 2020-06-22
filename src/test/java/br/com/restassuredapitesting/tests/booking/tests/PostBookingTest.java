@@ -1,6 +1,7 @@
 package br.com.restassuredapitesting.tests.booking.tests;
 
 import br.com.restassuredapitesting.suites.Acceptance;
+import br.com.restassuredapitesting.suites.AllTests;
 import br.com.restassuredapitesting.suites.E2e;
 import br.com.restassuredapitesting.tests.base.tests.BaseTest;
 import br.com.restassuredapitesting.tests.booking.requests.PostBookingRequest;
@@ -22,7 +23,7 @@ public class PostBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.CRITICAL)
-    @Category(Acceptance.class)
+    @Category({Acceptance.class, AllTests.class})
     @DisplayName("Criar uma nova reserva")
     public void validarCriarUmaReserva() throws Exception {
         postBookingRequest.criarReserva(Utils.validPayloadBooking()).then()
@@ -34,7 +35,7 @@ public class PostBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.NORMAL)
-    @Category(E2e.class)
+    @Category({E2e.class, AllTests.class})
     @DisplayName("Validar retorno 500 quando o payload da reserva estiver inválido")
     public void validarCriarUmaReservaPayloadInvalido() throws Exception {
         postBookingRequest.criarReserva(Utils.invalidPayloadBooking()).then()
@@ -45,7 +46,7 @@ public class PostBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.CRITICAL)
-    @Category(E2e.class)
+    @Category({E2e.class, AllTests.class})
     @DisplayName("Validar a criacao de mais de um livro em sequencia")
     public void validarCriarMaisDeUmaReserva() throws Exception {
         postBookingRequest.criarReserva(Utils.validPayloadBooking()).then()
@@ -61,7 +62,7 @@ public class PostBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.NORMAL)
-    @Category(E2e.class)
+    @Category({E2e.class, AllTests.class})
     @DisplayName("Criar uma reserva enviando mais parametros no payload da reserva")
     public void validarCriarUmaReservaCampoExtraPayload() throws Exception {
         postBookingRequest.criarReserva(Utils.payloadBookingExtraField()).then()
@@ -72,7 +73,7 @@ public class PostBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.NORMAL)
-    @Category(E2e.class)
+    @Category({E2e.class, AllTests.class})
     @DisplayName("Validar retorno 418 quando o header Accept for invalido")
     public void validarCriarUmaReservaComHeaderErrado() throws Exception {
         postBookingRequest.criarReserva(Utils.validPayloadBooking(), "application/joaquim").then()

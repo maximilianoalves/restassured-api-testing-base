@@ -1,6 +1,7 @@
 package br.com.restassuredapitesting.tests.booking.tests;
 
 import br.com.restassuredapitesting.suites.Acceptance;
+import br.com.restassuredapitesting.suites.AllTests;
 import br.com.restassuredapitesting.suites.Contract;
 import br.com.restassuredapitesting.suites.E2e;
 import br.com.restassuredapitesting.tests.base.tests.BaseTest;
@@ -27,7 +28,7 @@ public class GetBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.NORMAL)
-    @Category(Acceptance.class)
+    @Category({Acceptance.class, AllTests.class})
     @DisplayName("Listar IDs das reservas")
     public void validarIdsDasReservas() throws Exception {
         getBookingRequest.allBookings().then()
@@ -39,7 +40,7 @@ public class GetBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category(Contract.class)
+    @Category({Contract.class, AllTests.class})
     @DisplayName("Garantir o contrato do retorno da lista de reservas")
     public void garantirContratosListaReserva() throws Exception {
         getBookingRequest.allBookings().then()
@@ -54,7 +55,7 @@ public class GetBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category(Acceptance.class)
+    @Category({Acceptance.class, AllTests.class})
     @DisplayName("Listar IDs de reservas utilizando o filtro firstname")
     public void validarReservasUtilizandoFiltroFirstname() throws Exception {
         getBookingRequest.allBookings("firstname", "Mary").then()
@@ -65,7 +66,7 @@ public class GetBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category(Acceptance.class)
+    @Category({Acceptance.class, AllTests.class})
     @DisplayName("Listar IDs de reservas utilizando o filtro lastname")
     public void validarReservasUtilizandoFiltroLastname() throws Exception {
         getBookingRequest.allBookings("lastname", "Ericsson").then()
@@ -76,7 +77,7 @@ public class GetBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category(Acceptance.class)
+    @Category({Acceptance.class, AllTests.class})
     @DisplayName("Listar IDs de reservas utilizando o filtro checkin")
     public void validarReservasUtilizandoFiltroCheckin() throws Exception {
         getBookingRequest.allBookings("checkin", "2015-06-21").then()
@@ -87,7 +88,7 @@ public class GetBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category(Acceptance.class)
+    @Category({Acceptance.class, AllTests.class})
     @DisplayName("Listar IDs de reservas utilizando o filtro checkout")
     public void validarReservasUtilizandoFiltroCheckout() throws Exception {
         getBookingRequest.allBookings("checkout", "2016-12-10").then()
@@ -98,7 +99,7 @@ public class GetBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category(Acceptance.class)
+    @Category({Acceptance.class, AllTests.class})
     @DisplayName("Listar IDs de reservas utilizando o filtro checkin and checkout")
     public void validarReservasUtilizandoFiltroCheckinECheckout() throws Exception {
         getBookingRequest.allBookings(
@@ -111,7 +112,7 @@ public class GetBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category(Acceptance.class)
+    @Category({Acceptance.class, AllTests.class})
     @DisplayName("Listar IDs de reservas utilizando o filtro name, checkin and checkout date")
     public void validarReservasUtilizandoFiltroCheckinCheckoutEName() throws Exception {
         getBookingRequest.allBookings(
@@ -125,7 +126,7 @@ public class GetBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category(E2e.class)
+    @Category({E2e.class, AllTests.class})
     @DisplayName("Visualizar erro de servidor 500 quando enviar filtro mal formatado")
     public void validarReservasUtilizandoFiltroMalFormatado() throws Exception {
         getBookingRequest.allBookings(
@@ -136,7 +137,7 @@ public class GetBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.NORMAL)
-    @Category(Acceptance.class)
+    @Category({Acceptance.class, AllTests.class})
     @DisplayName("Listar uma reserva especifica")
     public void validarUmReservaEspecifica() throws Exception {
         int primeiroId = getBookingRequest.allBookings().then().statusCode(200).extract().path("[0].bookingid");
@@ -150,7 +151,7 @@ public class GetBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category(Contract.class)
+    @Category({Contract.class, AllTests.class})
     @DisplayName("Garantir o contrato do retorno de uma reserva específica")
     public void garantirContratoUmaReserva() throws Exception {
         int primeiroId = getBookingRequest.allBookings().then().statusCode(200).extract().path("[0].bookingid");
