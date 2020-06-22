@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Categories.class)
-@Categories.IncludeCategory(br.com.restassuredapitesting.suites.Contract.class)
+@Categories.IncludeCategory(br.com.restassuredapitesting.suites.E2e.class)
 @Suite.SuiteClasses({
         //base
         BaseTest.class,
@@ -26,5 +26,5 @@ import org.junit.runners.Suite;
         DeleteBookingTest.class,
         PutBookingTest.class
 })
-public class Contracts {
+public class E2e {
 }
