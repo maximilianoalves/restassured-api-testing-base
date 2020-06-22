@@ -1,5 +1,7 @@
 package br.com.restassuredapitesting.tests.booking.tests;
 
+import br.com.restassuredapitesting.suites.Acceptance;
+import br.com.restassuredapitesting.suites.Contract;
 import br.com.restassuredapitesting.tests.base.tests.BaseTest;
 import br.com.restassuredapitesting.tests.booking.requests.GetBookingRequest;
 import br.com.restassuredapitesting.utils.Utils;
@@ -25,6 +27,7 @@ public class GetBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.NORMAL)
+    @Category(Acceptance.class)
     @DisplayName("Listar IDs das reservas")
     public void validarIdsDasReservas() throws Exception {
         getBookingRequest.allBookings().then()
@@ -36,6 +39,7 @@ public class GetBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
+    @Category(Contract.class)
     @DisplayName("Garantir o contrato do retorno da lista de reservas")
     public void garantirContratosListaReserva() throws Exception {
         getBookingRequest.allBookings().then()
