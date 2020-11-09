@@ -15,6 +15,8 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import java.io.File;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
@@ -58,7 +60,11 @@ public class GetBookingTest extends BaseTest {
     @Category({Acceptance.class, AllTests.class})
     @DisplayName("Listar IDs de reservas utilizando o filtro firstname")
     public void validarReservasUtilizandoFiltroFirstname() throws Exception {
-        getBookingRequest.allBookings("firstname", "Mary").then()
+        int primeiroId = getBookingRequest.allBookings().then().statusCode(200).extract().path("[0].bookingid");
+        String name = getBookingRequest.booking(primeiroId).then().statusCode(200).extract().path("firstname");
+
+
+        getBookingRequest.allBookings("firstname", name).then()
                 .statusCode(200)
                 .time(lessThan(2L), TimeUnit.SECONDS)
                 .body("size()", greaterThan(0));
@@ -164,6 +170,19 @@ public class GetBookingTest extends BaseTest {
                                 new File(Utils.getContractsBasePath("booking", "booking"))
                         )
                 );
+    }
+
+    @Test
+    @Severity(SeverityLevel.BLOCKER)
+    @Category({Acceptance.class, AllTests.class})
+    @DisplayName("Listar IDs de reservas")
+    public void validarListaDeIds() throws Exception {
+        List<Map<String, Object>> bookingsIds = getBookingRequest.allBookings().then().statusCode(200).extract().path("$");
+
+        bookingsIds.forEach((id) -> {
+            System.out.println(id); //all object
+            System.out.println(id.get("bookingid")); // only bookingid node
+        });
     }
 
 
